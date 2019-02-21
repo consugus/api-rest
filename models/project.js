@@ -7,8 +7,9 @@
      name: String,
      description: String,
      category: String,
-     year: number,
-     langs: [String]
+     year: Number,
+     langs: String,
+     image: String
  });
 
- module.exports = mongoose.model('Project', 'ProjectSchema');
+ module.exports = mongoose.model('Project', ProjectSchema);
