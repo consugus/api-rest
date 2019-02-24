@@ -13,7 +13,20 @@ var project_routes = require("./routes/project");
 app.use(bodyParser.urlencoded({extended:false}) );
 app.use(bodyParser.json() );
 
-// CORS
+// CORS (Cross Origin Resource Sharing)
+// Por razones de seguridad los navegadores restringen las solicitudes HTTP de orígen cruzado
+// iniciadas dentro de un script: esto significa que una aplicación que utilice éstas APIs solo
+// puede hacer peticiones HTTP a su propio dominio a menos que se utilicen cabeceras CORS.
+// Para ello se puede utilizar un middleware como el siguiente
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); // Cuando se publique la app en lugar de "*" hay que poner la url permitida
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
+
+
 
 //rutas
 //#region rutas para ejemplo
