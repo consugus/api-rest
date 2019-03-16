@@ -24,7 +24,7 @@ var controller = {
         project.image = null;
 
         project.save((err, projectStored) => {
-            if (err) return res.status(500).send({ messaje: "Error al guardar el documento" })
+            if (err) return res.status(500).send({ messaje: "Error al guardar el documento" });
 
             if(!projectStored) return res.status(404).send("No se ha podido guardar el documento");
 
@@ -45,7 +45,6 @@ var controller = {
     }, // end getProjectById
 
       getProjects: function(req, res){
-
         Project.find({}).sort("year").exec( (err, projects) => {
             if(err) return res.status(500).send({message:"Error al devolver los datos"});
             if(!projects == null) return res.status(404).send({message:"No hay proyectos para mostrar"});
@@ -91,7 +90,7 @@ var controller = {
             var admisibleExtentions = ["jpg", "png", "jpeg", "gif"];
 
             if(admisibleExtentions.includes(extention)){
-                console.log("si incluye el valor");
+                console.log("Formato de imágen válido");
                 Project.findOneAndUpdate(projectId, {image:fileName}, {new: true} , (err, projectUpdated) => {
                     if(err) return res.status(500).send({message: "La imagen no se ha subido"});
                     if(!projectUpdated) return res.status(404).send({message: "El projecto no existe y no se ha asignado la imagen"});
